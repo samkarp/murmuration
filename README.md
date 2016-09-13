@@ -11,8 +11,7 @@ Entity with a particular skillset that is scheduled against objectives.
   shift_start - integer - seconds past calendar day (00:00:00). Must be less than 86400 (seconds in a day).
   shift_end - integer - seconds past calendar day (00:00:00). If shift crosses the calendar day, then the value will be 86400 + second value to end time on final day. A resource can be active for multiple days. Each calendar day would just add 86400 to the value.
   skillset - array of strings
-  speed
-  duration
+  speed - double - asset speed in MPH
   regionids - array of regions where the resource can patrol
 ```
 
