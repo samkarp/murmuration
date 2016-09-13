@@ -16,7 +16,7 @@ Entity with a particular skillset that is scheduled against objectives.
 ```
 
 ### patrol
-Unit of work that applies a resource against objectives. One to many patrols are required to satisfy objectives
+Unit of work that applies a resource towards completing objective(s). One to many patrols are required to satisfy an objective.
 
 ```
   resource_id - id of resource allocated to patrol
