@@ -16,8 +16,12 @@ Murmuration is a web application designed to provide visibility and insight into
 * Start elasticsearch. `$ELASTICSSEARCH_HOME/bin/elasticsearch`
 * Load Elasticsearch mappings. `$MURMURATION_HOME/mappings/load_mappings.sh`
 
+### Loading sample data
+* Run the script `$MURMURATION_HOME/sample_data/load.sh`
+
 ## Web API
 Elasticsearch's REST API will be the web API until murmuration outgrowns this simple implemenation
+
 ## Data types
 
 ### resource
