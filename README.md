@@ -45,5 +45,6 @@ Unit of work that applies a resource towards completing objective(s). One to man
   directive - tag defining higher-level grouping of objectives
   originiator - id 
   targets - array of target ids
-  priority - integar
+  priority - integer
+  skillsets - array of tags identifing capabilities required to meet the objective
 ```
