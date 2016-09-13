@@ -10,12 +10,14 @@ Entity with a particular skillset that is scheduled against objectives.
   shift_start - date
   shift_end - date
   skillset - array of strings
+  speed
+  duration
 ```
 
 ### patrol
 
 ```
-  resource id
+  resource_id - id of resource allocated to patrol
   primary_objective - id of primary objective
   secondary_objectives - array of objective ids
   start
@@ -36,6 +38,7 @@ Entity with a particular skillset that is scheduled against objectives.
 ```
   id - string
   name - string
+  description - string
   directive - tag defining higher-level grouping of objectives
   originiator - id 
   targets - array of target ids
