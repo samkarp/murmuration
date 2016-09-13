@@ -12,9 +12,11 @@ Entity with a particular skillset that is scheduled against objectives.
   skillset - array of strings
   speed
   duration
+  regionids - array of regions where the resource can patrol
 ```
 
 ### patrol
+Unit of work that applies a resource against objectives. One to many patrols are required to satisfy objectives
 
 ```
   resource_id - id of resource allocated to patrol
@@ -35,6 +37,7 @@ Entity with a particular skillset that is scheduled against objectives.
 ```
 
 ### objective
+
 ```
   id - string
   name - string
