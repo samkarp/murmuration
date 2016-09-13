@@ -5,11 +5,7 @@
         "description" : {
           "type" : "string"
         },
-        "id" : {
-          "type" : "string",
-          "index": "not_analyzed"
-        },
-        "location" : {
+        "loc" : {
           "type" : "geo_shape"
         },
         "name" : {
