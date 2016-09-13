@@ -1,8 +1,27 @@
+# Murmuration
+Murmuration is a web application designed to provide visibility and insight into resource allocation against prioritized objectives.
 
+## Getting started
+
+### Setting up Elasticsearch
+* Install latest Java 8
+* Download and install lastest elasticsearch 2.x version
+* Configure elasticsearch for CORS. Add the following to `$ELASTICSSEARCH_HOME/config/elasticsearch.yml`
+```
+ http.cors.enabled: true
+ http.cors.allow-origin: '*'
+ http.cors.allow-methods : OPTIONS, HEAD, GET, POST, PUT, DELETE
+ http.cors.allow-headers : X-Requested-With,X-Auth-Token,Content-Type, Content-Length
+```
+* Start elasticsearch. `$ELASTICSSEARCH_HOME/bin/elasticsearch`
+* Load Elasticsearch mappings. `$MURMURATION_HOME/mappings/load_mappings.sh`
+
+## Web API
+Elasticsearch's REST API will be the web API until murmuration outgrowns this simple implemenation
 ## Data types
 
 ### resource
-Entity with a particular skillset that is scheduled against objectives.
+An ssset with particular skillsets that are deployed against objectives.
 
 ```
   id - string
@@ -13,6 +32,9 @@ Entity with a particular skillset that is scheduled against objectives.
   skillset - array of strings
   speed - double - asset speed in MPH
   regionids - array of regions where the resource can patrol
+  current_loc - object
+    time - date at location
+    loc - geo_point
 ```
 
 ### patrol
@@ -26,11 +48,20 @@ Unit of work that applies a resource towards completing objective(s). One to man
   end - date
 ```
 
+### region
+
+```
+  id - string
+  name - string 
+  description - string
+  loc - geo_shape
+```
+
 ### target
 
 ```
-  id
-  name
+  id - string
+  name - string
   description - string
   location - geo_point
   regionid - binds targets to region, could be zip code or something similiar
