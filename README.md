@@ -36,13 +36,21 @@ An ssset with particular skillsets that are deployed against objectives.
   skillset - array of strings
   speed - double - asset speed in MPH
   regionids - array of regions where the resource can patrol
-  current_loc - object
-    time - date at location
-    loc - geo_point
+```
+
+### resource location
+
+```
+ time - date at location
+ loc - geo_point
 ```
 
 ### patrol
 Unit of work that applies a resource towards completing objective(s). One to many patrols are required to satisfy an objective.
+
+**Actions**
+* Create
+* Cancel
 
 ```
   resource_id - id of resource allocated to patrol
@@ -50,6 +58,10 @@ Unit of work that applies a resource towards completing objective(s). One to man
   secondary_objectives - array of objective ids
   start - date
   end - date
+  cancelled - boolean indicating if patrol has been cancelled
+  cancelDetails - object
+    tags - array of strings identifingy why patrol was cancelled - such as 'weater', 'reschedule', 'equipment_malfunction', 'personal', and so on.
+    reason - More detailed explaination
 ```
 
 ### region
