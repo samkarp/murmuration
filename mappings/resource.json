@@ -2,17 +2,6 @@
   "mappings": {
     "resource": {
       "properties" : {
-        "current_loc" : {
-          "properties" : {
-            "loc" : {
-              "type" : "geo_point"
-            },
-            "time" : {
-              "type" : "date",
-              "format" : "date_hour_minute_second_millis"
-            }
-          }
-        },
         "description" : {
           "type" : "string"
         },
