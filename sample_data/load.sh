@@ -1,5 +1,5 @@
 echo -e "\nRemove any cruft, delete and reload indexes"
-../mappings/load_mappings.sh
+../mappings/load_mappings.sh ../mappings
 
 echo -e "\nLoading region sample data"
 curl -XPOST 'localhost:9200/murmuration_region/region/_bulk?pretty' --data-binary "@regions.json"
