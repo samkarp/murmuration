@@ -59,6 +59,10 @@ var Result = React.createClass({
                                 <th className="col-md-4">Name</th>
                                 <th >Description</th>
                                 <th>Skillsets</th>
+                                <th>Priority</th>
+                                <th>Targets</th>
+                                <th>Start</th>
+                                <th>End</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,6 +83,10 @@ var ResultItem = React.createClass({
                 <td>{objective._source.name}</td>
                 <td>{objective._source.description}</td>
                 <td>{objective._source.skillsets}</td>
+                <td>{objective._source.priority}</td>
+                <td>{objective._source.targets}</td>
+                <td>{objective._source.start}</td>
+                <td>{objective._source.end}</td>
             </tr>
         );
     }
