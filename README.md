@@ -22,6 +22,12 @@ Murmuration is a web application designed to provide visibility and insight into
 ## Web API
 Elasticsearch's REST API will be the web API until murmuration outgrowns this simple implemenation
 
+## Running the ReactJS App
+* Go to the `$MURMURATION_HOME` directory
+* Run the `npm install` command from there (NOTE: It takes a long time)
+* Run `npm start`
+* <That should complete running then open a browser window to the correct URL>
+
 ## Data types
 
 ### resource
