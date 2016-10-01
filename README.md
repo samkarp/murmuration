@@ -26,7 +26,7 @@ Elasticsearch's REST API will be the web API until murmuration outgrowns this si
 * Go to the `$MURMURATION_HOME` directory
 * Run the `npm install` command from there (NOTE: It takes a long time)
 * Run `npm start`
-* <That should complete running then open a browser window to the correct URL>
+* That should complete running then open a browser window to the correct URL
 
 ## Data types
 
