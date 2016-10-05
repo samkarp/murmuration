@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Table = React.createClass({
   //setting up initial state
@@ -52,8 +53,8 @@ const Result = React.createClass({
           <table className="table table-bordered">
             <thead>
             <tr>
-              <th className="col-md-4">Name</th>
-              <th >Description</th>
+              <th>Name</th>
+              <th>Description</th>
               <th>Skillsets</th>
               <th>Priority</th>
               <th>Targets</th>
@@ -75,14 +76,14 @@ var ResultItem = React.createClass({
   render:function(){
     var objective = this.props.objective;
     return(
-      <tr >
-        <td>{objective._source.name}</td>
+      <tr>
+        <td><Link to={"/objective/" + objective._id}>{objective._source.name}</Link></td>
         <td>{objective._source.description}</td>
         <td>{objective._source.skillsets}</td>
         <td>{objective._source.priority}</td>
         <td>{objective._source.targets}</td>
         <td>{objective._source.start}</td>
-        <td>{objective._source.end}</td>
+        <td>{objective._source.end}</td>      
       </tr>
     );
   }
