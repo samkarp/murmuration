@@ -31,7 +31,7 @@ Elasticsearch's REST API will be the web API until murmuration outgrowns this si
 ## Data types
 
 ### resource
-An ssset with particular skillsets that are deployed against objectives.
+An asset with particular skillsets that are deployed against objectives.
 
 ```
   id - string
