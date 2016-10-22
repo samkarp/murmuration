@@ -1,8 +1,6 @@
 import React from 'react';
 import Map from './Map';
-import Grid from 'react-bootstrap';
-import Row from 'react-bootstrap';
-import Col from 'react-bootstrap';
+import Sidebar from './Sidebar';
 
 const  ViewMapItems = React.createClass({
   render: function() {
@@ -10,11 +8,11 @@ const  ViewMapItems = React.createClass({
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-2 col-md-2 sidebar">
-            TESTING MY SIDEBAR AREA
+          <div className="col-md-2 sidebar">
+            <Sidebar />
           </div>
-          <div className="col-sm-10 col-sm-offset-2 col-md-offset2 main">
-            <Map size={{width: '80vw', height: '95vh'}} />
+          <div className="col-md-10 map">
+            <Map size={{width: '80vw', height: '85vh'}} />
           </div>
         </div>
       </div>
@@ -22,11 +20,3 @@ const  ViewMapItems = React.createClass({
 });
 
 export default ViewMapItems
-
-
-// <Grid>
-// <Row className="show-grid">
-//   <Col sm={6} md={3}>First Column</Col>
-// <Col sm={6} md={3}>First Column</Col>
-// </Row>
-// </Grid>

@@ -39,6 +39,7 @@
   },
   "homepage": "https://github.com/samkarp/murmuration#readme",
   "dependencies": {
+    "axios": "^0.15.2",
     "history": "^3.0.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",

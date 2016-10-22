@@ -35,3 +35,20 @@ section {
  padding: 20px;
 }
 
+.targetListItem a {
+  display: block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 0 0 10px 0;
+  text-decoration: none;
+  color: black;
+}
+.targetListItem a:hover {
+  background: #eee;
+}
+.targetListItem a span {
+  margin: 0 2px;
+}
+.targetListItem a span:first-child {
+  font-weight: 900;
+}
