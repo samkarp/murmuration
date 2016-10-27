@@ -53,7 +53,9 @@ const Objective = React.createClass({
 			<div>
 				<div>
 					{ objectiveResult }
+					<hr/>
 					{ targetListResult }
+					<hr/>
 					{ targetMapResult }
 				</div>
 				
