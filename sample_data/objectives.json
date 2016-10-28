@@ -2,4 +2,6 @@
 {"description":"Reduce violence on 16th mall","end":"2016-12-31T23:59:59.000","name":"16th violence","priority":2,"targets":["1"],"skillsets":["police_presence"],"start":"2016-01-01T00:00:00.000"}
 {"index":{"_id":"2"}}
 {"description":"Reduce drug usage along cherry creek trail","end":"2016-12-31T23:59:59.000","name":"drugs","priority":2,"targets":["2"],"skillsets":["police_presence","anit_drug"],"start":"2016-01-01T00:00:00.000"}
- 
+{"index":{"_id":"3"}}
+{"description":"garage theft monitoring","end":"2016-12-15T23:59:59.000","name":"theft","priority":3,"targets":["3","5"],"skillsets":["theft"],"start":"2016-12-01T00:00:00.000"}
+  

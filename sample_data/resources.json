@@ -4,3 +4,5 @@
 {"name":"squad car 1","shift-end":64800,"shift_start":28800,"skillsets":["police_presence"],"regionids":["1"]}
 {"index":{"_id":"3"}}
 {"name":"squad car 2","shift-end":0,"shift_start":28800,"skillsets":["police_presence"],"regionids":["1"]}
+{"index":{"_id":"4"}}
+{"name":"squad car 3","shift-end":0,"shift_start":28800,"skillsets":["theft"],"regionids":["2"]}
