@@ -35,6 +35,11 @@ section {
  padding: 20px;
 }
 
+.panel-group {
+  margin-bottom: 0px !important;
+
+}
+
 .targetListItem a {
   display: block;
   padding: 10px;
@@ -50,5 +55,77 @@ section {
   margin: 0 2px;
 }
 .targetListItem a span:first-child {
+  font-weight: 900;
+}
+
+.regionListItem a {
+  display: block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 0 0 10px 0;
+  text-decoration: none;
+  color: black;
+}
+.regionListItem a:hover {
+  background: #eee;
+}
+.regionListItem a span {
+   margin: 0 2px;
+ }
+.regionListItem a span:first-child {
+  font-weight: 900;
+}
+
+.regionListItem a {
+  display: block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 0 0 10px 0;
+  text-decoration: none;
+  color: black;
+}
+.regionListItem a:hover {
+  background: #eee;
+}
+.regionListItem a span {
+  margin: 0 2px;
+}
+.regionListItem a span:first-child {
+  font-weight: 900;
+}
+
+.objectiveListItem a {
+  display: block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 0 0 10px 0;
+  text-decoration: none;
+  color: black;
+}
+.objectiveListItem a:hover {
+  background: #eee;
+}
+.objectiveListItem a span {
+  margin: 0 2px;
+}
+.objectiveListItem a span:first-child {
+  font-weight: 900;
+}
+
+.resourceListItem a {
+  display: block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 0 0 10px 0;
+  text-decoration: none;
+  color: black;
+}
+.resourceListItem a:hover {
+  background: #eee;
+}
+.resourceListItem a span {
+  margin: 0 2px;
+}
+.resourceListItem a span:first-child {
   font-weight: 900;
 }

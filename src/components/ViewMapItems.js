@@ -8,11 +8,11 @@ const  ViewMapItems = React.createClass({
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-2 sidebar">
+          <div className="col-md-3 sidebar">
             <Sidebar />
           </div>
-          <div className="col-md-10 map">
-            <Map size={{width: '80vw', height: '85vh'}} />
+          <div className="col-md-9 map">
+            <Map size={{width: '72vw', height: '85vh'}} />
           </div>
         </div>
       </div>
