@@ -3,6 +3,10 @@ import axios from 'axios';
 
 const  TargetListItem = React.createClass({
 
+  handleClick: function() {
+    alert('Clicked in TargetListItem');
+  },
+
   render: function() {
 
     var classname = "targetCollapse"+this.props.target._id
@@ -35,7 +39,7 @@ const  TargetListItem = React.createClass({
                               <ul className="list-group">
                                 {this.props.regions.map(function(region){
 
-                                  return ( <li key={region._id} className="list-group-item"><a href="#">{region._source.description}</a></li> )
+                                  return ( <li key={region._id} className="list-group-item"  ><a onClick={ this.props.onClick.bind(null,this) } >{region._source.description}</a></li> )
 
                                 })}
 

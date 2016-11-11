@@ -1,8 +1,11 @@
 import React from 'react';
 import TargetListItem from './TargetListItem'
-import axios from 'axios';
 
 const  TargetListPanel = React.createClass({
+
+  handleClick: function() {
+    alert('Clicked in TargetPanel');
+  },
 
   render: function() {
 
@@ -12,7 +15,7 @@ const  TargetListPanel = React.createClass({
 
     return (
       <div>
-        <h4 style={{color: "red"}}>SEARCH</h4>
+        <h4 style={{color: "red"}} >SEARCH</h4>
           {this.props.targets.map(function(target){
 
             //Filter the regions by using the RegionId of the target
@@ -34,7 +37,7 @@ const  TargetListPanel = React.createClass({
             var objectivesForThisTarget = objectives.filter(function(objective){ return objective._source.targets.includes(target._id) });
 
             return(
-              <TargetListItem key={target._id} target={target} regions={regionsForThisTarget} resources={resourcesForThisTarget} objectives={objectivesForThisTarget} />
+              <TargetListItem key={target._id} target={target} regions={regionsForThisTarget} resources={resourcesForThisTarget} objectives={objectivesForThisTarget} onClick={ () => this.handleClick() } />
             )
           })}
       </div>
