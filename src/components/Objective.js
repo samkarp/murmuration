@@ -35,11 +35,7 @@ const Objective = React.createClass({
 	    });
 	},
 	render: function(){
-		var targetArray;
-		var skillsetArray;
 		var objectiveResult = this.state.data.map(function(result,index){
-      		targetArray = result._source.targets;      		
-      		skillsetArray = result._source.skillsets;
       		return <ObjectiveItem key={index} objective={ result } />
     	});
     	var targetListResult = this.state.data.map(function(result, index){
@@ -49,15 +45,20 @@ const Objective = React.createClass({
     	var targetMapResult = this.state.data.map(function(result, index){
     		return <TargetMap key={index} targets={result._source.targets} />
     	})
+    	var skillsetResult = this.state.data.map(function(result, index){
+    		return <ResourceList key={index} skillset={ result._source.skillsets} />
+    	});
 		return (
 			<div>
 				<div>
 					{ objectiveResult }
+					<hr/>
 					{ targetListResult }
+					<hr/>
 					{ targetMapResult }
+					<hr/>
+					{ skillsetResult }
 				</div>
-				
-				<ResourceList skillset={ skillsetArray }/>
 			</div>
 		)
 	}
