@@ -24,7 +24,8 @@ export class Map extends React.Component {
     this.state = {
       map: null,
       tileLayer: null,
-      targetGroupLayer: null
+      targetGroupLayer: null,
+      regionGroupLayer: null
       // geojsonLayer: null,
       // geojson: null,
       // subwayLinesFilter: '*',
@@ -60,6 +61,25 @@ export class Map extends React.Component {
     this.setState({map, tileLayer});
   }
 
+  addRegionLayer(regionsARL) {
+    if(regionsARL.length > 0) {
+      //Clear the existing markers only if there already are some
+      if (this.state.regionGroupLayer) {
+        console.log("Clearning Regions Layers");
+        this.state.regionGroupLayer.clearLayers();
+      }
+
+      var geojsonArray = [];
+
+      //Add a new marker for each target
+      for (var i = 0; i < regionsARL.length; i++) {
+        // var marker = new L.marker([targetsATL[i]._source.loc[1], targetsATL[i]._source.loc[0]]);
+        geojsonArray.push(new L.geoJSON((regionsARL[i]._source.loc)));
+      }
+
+    }
+  }
+
   addTargetLayer(targetsATL) {
 
     //Add the markers to the map if we have any selected targets
@@ -86,7 +106,7 @@ export class Map extends React.Component {
       targetGroupLayer.addTo(this.state.map);
 
       //Set the state so that we can use it later
-      this.setState({targetGroupLayer});
+      // this.setState({targetGroupLayer});
 
       //Zoom to the group
       this.zoomToFeature(targetGroupLayer);
@@ -124,12 +144,36 @@ export class Map extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     // code to run when the component receives new props or state
     // check to see if geojson is stored, map is created, and geojson overlay needs to be added
-    console.log("Updating with targets:");
-    console.log(this.props.targets);
+    console.log("Updating with updated items:");
+    console.log(this.props.items);
+
+    function isTarget(entry) {
+      return entry._type == "target"
+    }
+
+    function isRegion(entry) {
+      return entry._type == "region"
+    }
+
+    var prevTgtArray = prevProps.items.filter(isTarget);
+    var prevRgnArray = prevProps.items.filter(isRegion);
+    var targetArray = this.props.items.filter(isTarget);
+    var regionArray = this.props.items.filter(isRegion);
+
+    console.log("Targets: ");
+    console.log(prevTgtArray);
+    console.log(targetArray);
+    console.log("Regions: ");
+    console.log(prevRgnArray);
+    console.log(regionArray);
+
 
     // if (this.state.map && !this.state.targetGroupLayer ) {
-    if (prevProps.targets !== this.props.targets) {
-      this.addTargetLayer(this.props.targets);
+    if (prevTgtArray.length !== targetArray.length) {
+      this.addTargetLayer(targetArray);
+    }
+    if (prevRgnArray.length !== regionArray.length) {
+      this.addRegionLayer(regionArray);
     }
 
   }

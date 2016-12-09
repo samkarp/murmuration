@@ -95,15 +95,18 @@ class Sidebar extends React.Component {
             </div>
             <div className="tab-pane" id="2">
               <RegionListPanel targets={this.state.targets} regions={this.state.regions}
-                               resources={this.state.resources} objectives={this.state.objectives}/>
+                               resources={this.state.resources} objectives={this.state.objectives}
+                               onClick={(e) => this.handleClick(e)}/>
             </div>
             <div className="tab-pane" id="3">
               <ObjectiveListPanel targets={this.state.targets} regions={this.state.regions}
-                                  resources={this.state.resources} objectives={this.state.objectives}/>
+                                  resources={this.state.resources} objectives={this.state.objectives}
+                                  onClick={(e) => this.handleClick(e)}/>
             </div>
             <div className="tab-pane" id="4">
               <ResourceListPanel targets={this.state.targets} regions={this.state.regions}
-                                 resources={this.state.resources} objectives={this.state.objectives}/>
+                                 resources={this.state.resources} objectives={this.state.objectives}
+                                 onClick={(e) => this.handleClick(e)}/>
             </div>
           </div>
         </div>

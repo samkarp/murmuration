@@ -34,7 +34,7 @@ class ViewMapItems extends React.Component {
             <Sidebar onClick={(e) => this.updateMap(e)}/>
           </div>
           <div className="col-md-9 map">
-            <Map size={{width: '72vw', height: '85vh'}} targets={this.state.selectedItems}/>
+            <Map size={{width: '72vw', height: '85vh'}} items={this.state.selectedItems}/>
           </div>
         </div>
       </div>
