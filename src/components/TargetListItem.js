@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import TargetSubregionItem from './TargetSubregionItem'
 
 class TargetListItem extends React.Component {
 
@@ -14,10 +14,13 @@ class TargetListItem extends React.Component {
 
     this.props.onClick(item);
 
-
     var selected = !this.state.isSelected;
     this.setState({isSelected: selected});
 
+  }
+
+  handleRegionClick(item) {
+    this.props.onClick(item);
   }
 
   render() {
@@ -27,7 +30,7 @@ class TargetListItem extends React.Component {
     var targetresourceclassname = "targetResourceCollapse" + this.props.target._id;
     var targetobjectiveclassname = "targetObjectiveCollapse" + this.props.target._id;
 
-    var regions = this.props.regions;
+    var globalThis = this;
 
     return (
       <div className="targetListItem">
@@ -53,8 +56,11 @@ class TargetListItem extends React.Component {
                         <ul className="list-group">
                           {this.props.regions.map(function (region) {
 
-                            return (<li key={region._id} className="list-group-item"><a
-                              href="#">{region._source.description}</a></li> )
+                            return (
+                              <TargetSubregionItem key={region._id}
+                                                   subregion={region}
+                                                   onClick={ () => globalThis.handleRegionClick(region) }/>
+                            )
 
                           })}
 

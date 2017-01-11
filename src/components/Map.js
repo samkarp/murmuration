@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import L from 'leaflet';
 
 let config = {};
@@ -26,10 +25,6 @@ export class Map extends React.Component {
       tileLayer: null,
       targetGroupLayer: null,
       regionGroupLayer: null
-      // geojsonLayer: null,
-      // geojson: null,
-      // subwayLinesFilter: '*',
-      // numEntrances: null
     };
     this._mapNode = null;
     this.pointToLayer = this.pointToLayer.bind(this);
@@ -62,6 +57,7 @@ export class Map extends React.Component {
   }
 
   addRegionLayer(regionsARL) {
+
     if(regionsARL.length > 0) {
       //Clear the existing markers only if there already are some
       if (this.state.regionGroupLayer) {
@@ -73,10 +69,16 @@ export class Map extends React.Component {
 
       //Add a new marker for each target
       for (var i = 0; i < regionsARL.length; i++) {
-        // var marker = new L.marker([targetsATL[i]._source.loc[1], targetsATL[i]._source.loc[0]]);
         geojsonArray.push(new L.geoJSON((regionsARL[i]._source.loc)));
       }
 
+      const regionGroupLayer = L.featureGroup(geojsonArray);
+      this.setState({regionGroupLayer: regionGroupLayer});
+
+      regionGroupLayer.addTo(this.state.map);
+
+    } else {
+      this.state.regionGroupLayer.clearLayers();
     }
   }
 
@@ -87,7 +89,6 @@ export class Map extends React.Component {
 
       //Clear the existing markers only if there already are some
       if (this.state.targetGroupLayer) {
-        console.log("Clearning Layers");
         this.state.targetGroupLayer.clearLayers();
       }
 
@@ -95,22 +96,21 @@ export class Map extends React.Component {
 
       //Add a new marker for each target
       for (var i = 0; i < targetsATL.length; i++) {
-        // var marker = new L.marker([targetsATL[i]._source.loc[1], targetsATL[i]._source.loc[0]]);
         markerArray.push(new L.marker([targetsATL[i]._source.loc[1], targetsATL[i]._source.loc[0]]));
       }
 
       //Add the markers to a featureGroup
       const targetGroupLayer = L.featureGroup(markerArray);
+      this.setState({targetGroupLayer: targetGroupLayer});
 
       //Add the group to the map
       targetGroupLayer.addTo(this.state.map);
 
-      //Set the state so that we can use it later
-      // this.setState({targetGroupLayer});
-
       //Zoom to the group
       this.zoomToFeature(targetGroupLayer);
 
+    } else { //If the current marker array is empty
+      this.state.targetGroupLayer.clearLayers();
     }
 
   }
@@ -159,14 +159,6 @@ export class Map extends React.Component {
     var prevRgnArray = prevProps.items.filter(isRegion);
     var targetArray = this.props.items.filter(isTarget);
     var regionArray = this.props.items.filter(isRegion);
-
-    console.log("Targets: ");
-    console.log(prevTgtArray);
-    console.log(targetArray);
-    console.log("Regions: ");
-    console.log(prevRgnArray);
-    console.log(regionArray);
-
 
     // if (this.state.map && !this.state.targetGroupLayer ) {
     if (prevTgtArray.length !== targetArray.length) {
