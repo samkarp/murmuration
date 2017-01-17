@@ -1,6 +1,6 @@
 import React from 'react';
 import RegionListItem from './RegionListItem'
-import axios from 'axios';
+import SearchObject from './SearchObject'
 
 class RegionListPanel extends React.Component {
 
@@ -26,7 +26,8 @@ class RegionListPanel extends React.Component {
 
     return (
       <div>
-        <h4 style={{color: "red"}}>SEARCH</h4>
+        <SearchObject items={this.props.regions} type={"Regions"}/>
+
         {this.props.regions.map(function (region) {
 
           //Filter targets by RegionID

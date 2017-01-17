@@ -1,6 +1,6 @@
 import React from 'react';
 import ResourceListItem from './ResourceListItem'
-import axios from 'axios';
+import SearchObject from './SearchObject'
 
 const  ResourceListPanel = React.createClass({
 
@@ -12,7 +12,8 @@ const  ResourceListPanel = React.createClass({
 
     return (
       <div>
-        <h4 style={{color: "red"}}>SEARCH</h4>
+        <SearchObject items={this.props.resources} type={"Resources"}/>
+
           {this.props.resources.map(function(resource){
 
             //Filter the regions by seeing if this Resource contains this RegionId

@@ -27,7 +27,7 @@ class TargetListPanel extends React.Component {
 
     return (
       <div>
-        <SearchObject targets={this.props.targets}/>
+        <SearchObject items={this.props.targets} type={"Targets"}/>
 
         {this.props.targets.map(function (target) {
 

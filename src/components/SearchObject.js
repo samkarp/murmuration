@@ -5,49 +5,44 @@ class SearchObject extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.handleClick = this.handleClick.bind(this);
-    // this.state = {
-    //   targets: []
-    // }
+
+    this.state = {
+      type: this.props.type,
+      options: [],
+      value: []
+    };
+
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+
   }
 
-  handleClick(selection) {
-    this.props.onClick(selection);
+  handleSelectChange(val) {
+    console.log('You\'ve selected:', val);
+    this.setState({value: val});
   }
 
   render() {
 
-    // var regions = this.props.regions;
-    // var resources = this.props.resources;
-    // var objectives = this.props.objectives;
-    var targets = this.props.targets;
-    //
-    // var functionToCall = this.handleClick;
-
-    // { value: 'one', label: 'One' },
-    // { value: 'two', label: 'Two' }
-
     var options = [];
 
-    this.props.targets.map(function (target) {
-      options.push({value:target._id, label:target._source.description})
+    //For each target, add it to the list and set the state value
+    this.props.items.map(function (object) {
+      options.push({value:object._id, label:(object._source.description ? object._source.description : object._source.name)})
     });
 
-    function logChange(val) {
-      console.log("Selected: " + val);
-    }
+    this.state.options = options;
 
     return (
       <div>
         <h4 style={{color: "red"}}>SEARCH</h4>
 
-
         <Select
-          name="form-field-name"
-          value="All"
-          multi={true}
-          options={options}
-          onChange={logChange}
+          multi
+          simpleValue
+          placeholder={"Search "+this.state.type+"..."}
+          value={this.state.value}
+          options={this.state.options}
+          onChange={this.handleSelectChange}
         />
         <br/>
         <br/>

@@ -1,6 +1,6 @@
 import React from 'react';
 import ObjectiveListItem from './ObjectiveListItem'
-import axios from 'axios';
+import SearchObject from './SearchObject'
 
 const  ObjectiveListPanel = React.createClass({
 
@@ -12,7 +12,9 @@ const  ObjectiveListPanel = React.createClass({
 
     return (
       <div>
-        <h4 style={{color: "red"}}>SEARCH</h4>
+
+        <SearchObject items={this.props.objectives} type={"Objectives"}/>
+
           {this.props.objectives.map(function(objective){
 
             //Filter the targets by checking the objective's TargetID list
