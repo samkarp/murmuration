@@ -8,12 +8,46 @@ class RegionListPanel extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      targets: []
+      regions: []
     }
   }
 
   handleClick(selection) {
     this.props.onClick(selection);
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    if(this.props != nextProps) {
+      this.setState({regions: nextProps.regions})
+    }
+  }
+
+
+  handleSearch(vals){
+    console.log("Handling Region Search");
+    console.log(vals);
+
+    var idArr = [vals.value];
+
+    if(vals.value.indexOf(",") != -1){
+      idArr = vals.value.split(",")
+    }
+
+    var rgns = [];
+
+    this.props.regions.map(function(target){
+      if(idArr.indexOf(target._id) != -1) {
+        rgns.push(target);
+      }
+    });
+
+    if(rgns.length == 0) {
+      this.setState({regions: this.props.regions})
+
+    } else {
+      this.setState({regions: rgns})
+    }
   }
 
   render() {
@@ -26,9 +60,9 @@ class RegionListPanel extends React.Component {
 
     return (
       <div>
-        <SearchObject items={this.props.regions} type={"Regions"}/>
+        <SearchObject items={this.props.regions} type={"Regions"} onChange={ (val) => this.handleSearch(val)} />
 
-        {this.props.regions.map(function (region) {
+        {this.state.regions.map(function (region) {
 
           //Filter targets by RegionID
           var targetsForThisRegion = targets.filter(function (target) {

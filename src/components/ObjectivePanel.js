@@ -2,9 +2,55 @@ import React from 'react';
 import ObjectiveListItem from './ObjectiveListItem'
 import SearchObject from './SearchObject'
 
-const  ObjectiveListPanel = React.createClass({
+class ObjectiveListPanel extends React.Component {
 
-  render: function() {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      objectives: []
+    }
+  }
+
+  handleClick(selection) {
+    this.props.onClick(selection);
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    if(this.props != nextProps) {
+      this.setState({objectives: nextProps.objectives})
+    }
+  }
+
+
+  handleSearch(vals){
+    console.log("Handling Objectives Search");
+    console.log(vals);
+
+    var idArr = [vals.value];
+
+    if(vals.value.indexOf(",") != -1){
+      idArr = vals.value.split(",")
+    }
+
+    var objs = [];
+
+    this.props.objectives.map(function(target){
+      if(idArr.indexOf(target._id) != -1) {
+        objs.push(target);
+      }
+    });
+
+    if(objs.length == 0) {
+      this.setState({objectives: this.props.objectives})
+
+    } else {
+      this.setState({objectives: objs})
+    }
+  }
+
+  render() {
 
     var targets = this.props.targets;
     var regions = this.props.regions;
@@ -13,9 +59,9 @@ const  ObjectiveListPanel = React.createClass({
     return (
       <div>
 
-        <SearchObject items={this.props.objectives} type={"Objectives"}/>
+        <SearchObject items={this.props.objectives} type={"Objectives"} onChange={ (val) => this.handleSearch(val)} />
 
-          {this.props.objectives.map(function(objective){
+          {this.state.objectives.map(function(objective){
 
             //Filter the targets by checking the objective's TargetID list
             var targetsForThisObjective = targets.filter(function(target){ return objective._source.targets.includes(target._id)});
@@ -43,6 +89,6 @@ const  ObjectiveListPanel = React.createClass({
           })}
       </div>
     )}
-});
+}
 
 export default ObjectiveListPanel

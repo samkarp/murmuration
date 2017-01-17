@@ -19,6 +19,8 @@ class SearchObject extends React.Component {
   handleSelectChange(val) {
     console.log('You\'ve selected:', val);
     this.setState({value: val});
+
+    this.props.onChange({type: this.state.type, value: val})
   }
 
   render() {
@@ -27,7 +29,7 @@ class SearchObject extends React.Component {
 
     //For each target, add it to the list and set the state value
     this.props.items.map(function (object) {
-      options.push({value:object._id, label:(object._source.description ? object._source.description : object._source.name)})
+      options.push({value:object._id, label:(!object._source.description || object._source.description.length >= 20 ? object._source.name : object._source.description)})
     });
 
     this.state.options = options;

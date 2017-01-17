@@ -2,9 +2,55 @@ import React from 'react';
 import ResourceListItem from './ResourceListItem'
 import SearchObject from './SearchObject'
 
-const  ResourceListPanel = React.createClass({
+class ResourceListPanel extends React.Component {
 
-  render: function() {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      resources: []
+    }
+  }
+
+  handleClick(selection) {
+    this.props.onClick(selection);
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    if(this.props != nextProps) {
+      this.setState({resources: nextProps.resources})
+    }
+  }
+
+
+  handleSearch(vals){
+    console.log("Handling Objectives Search");
+    console.log(vals);
+
+    var idArr = [vals.value];
+
+    if(vals.value.indexOf(",") != -1){
+      idArr = vals.value.split(",")
+    }
+
+    var rsrs = [];
+
+    this.props.resources.map(function(target){
+      if(idArr.indexOf(target._id) != -1) {
+        rsrs.push(target);
+      }
+    });
+
+    if(rsrs.length == 0) {
+      this.setState({resources: this.props.resources})
+
+    } else {
+      this.setState({resources: rsrs})
+    }
+  }
+
+  render() {
 
     var targets = this.props.targets;
     var regions = this.props.regions;
@@ -12,9 +58,9 @@ const  ResourceListPanel = React.createClass({
 
     return (
       <div>
-        <SearchObject items={this.props.resources} type={"Resources"}/>
+        <SearchObject items={this.props.resources} type={"Resources"} onChange={ (val) => this.handleSearch(val)} />
 
-          {this.props.resources.map(function(resource){
+          {this.state.resources.map(function(resource){
 
             //Filter the regions by seeing if this Resource contains this RegionId
             var regionsForThisResource = regions.filter(function(region){ return resource._source.regionids.includes(region._id) });
@@ -41,6 +87,6 @@ const  ResourceListPanel = React.createClass({
           })}
       </div>
     )}
-});
+}
 
 export default ResourceListPanel

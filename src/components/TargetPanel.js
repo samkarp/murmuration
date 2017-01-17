@@ -12,8 +12,42 @@ class TargetListPanel extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    if(this.props != nextProps) {
+      this.setState({targets: nextProps.targets})
+    }
+  }
+
+
   handleClick(selection) {
     this.props.onClick(selection);
+  }
+
+  handleSearch(vals){
+    console.log("Handling Search");
+    console.log(vals);
+
+    var idArr = [vals.value];
+
+    if(vals.value.indexOf(",") != -1){
+      idArr = vals.value.split(",")
+    }
+
+    var tgts = [];
+
+    this.props.targets.map(function(target){
+      if(idArr.indexOf(target._id) != -1) {
+        tgts.push(target);
+      }
+    });
+
+    if(tgts.length == 0) {
+      this.setState({targets: this.props.targets})
+
+    } else {
+      this.setState({targets: tgts})
+    }
   }
 
   render() {
@@ -21,15 +55,14 @@ class TargetListPanel extends React.Component {
     var regions = this.props.regions;
     var resources = this.props.resources;
     var objectives = this.props.objectives;
-    var targets = this.props.targets;
 
     var functionToCall = this.handleClick;
 
     return (
       <div>
-        <SearchObject items={this.props.targets} type={"Targets"}/>
+        <SearchObject items={this.props.targets} type={"Targets"} onChange={ (val) => this.handleSearch(val)}/>
 
-        {this.props.targets.map(function (target) {
+        {this.state.targets.map(function (target) {
 
           //Filter the regions by using the RegionId of the target
           var regionsForThisTarget = regions.filter(function (region) {
