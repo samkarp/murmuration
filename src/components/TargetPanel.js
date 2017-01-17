@@ -1,5 +1,6 @@
 import React from 'react';
 import TargetListItem from './TargetListItem'
+import SearchObject from './SearchObject'
 
 class TargetListPanel extends React.Component {
 
@@ -20,12 +21,14 @@ class TargetListPanel extends React.Component {
     var regions = this.props.regions;
     var resources = this.props.resources;
     var objectives = this.props.objectives;
+    var targets = this.props.targets;
 
     var functionToCall = this.handleClick;
 
     return (
       <div>
-        <h4 style={{color: "red"}}>SEARCH</h4>
+        <SearchObject targets={this.props.targets}/>
+
         {this.props.targets.map(function (target) {
 
           //Filter the regions by using the RegionId of the target
