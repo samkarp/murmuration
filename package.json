@@ -46,7 +46,8 @@
     "react-dom": "^15.0.1",
     "react-router": "^2.3.0",
     "react-bootstrap": "^0.30.5",
-    "leaflet":"^1.0.1"
+    "leaflet":"^1.0.1",
+    "leaflet-draw":"^0.4.9"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",

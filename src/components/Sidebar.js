@@ -18,47 +18,16 @@ class Sidebar extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    if(this.props != nextProps) {
+      this.setState({targets: nextProps.targets, regions: nextProps.regions,
+                    resources: nextProps.resources, objectives: nextProps.objectives})
+    }
+  }
+
   handleClick(item) {
     this.props.onClick(item);
-  }
-
-  componentDidMount() {
-    var _this = this;
-    this.serverRequest =
-      axios
-        .get("http://localhost:9200/murmuration_target/_search")
-        .then(function (result) {
-          _this.setState({
-            targets: result.data.hits.hits
-          });
-        });
-    this.serverRequest =
-      axios
-        .get("http://localhost:9200/murmuration_region/_search")
-        .then(function (result) {
-          _this.setState({
-            regions: result.data.hits.hits
-          });
-        });
-    this.serverRequest =
-      axios
-        .get("http://localhost:9200/murmuration_resource/_search")
-        .then(function (result) {
-          _this.setState({
-            resources: result.data.hits.hits
-          });
-        });
-    this.serverRequest =
-      axios
-        .get("http://localhost:9200/murmuration_objective/_search")
-        .then(function (result) {
-          _this.setState({
-            objectives: result.data.hits.hits
-          });
-        });
-  }
-
-  componentWillUnmount() {
   }
 
   render() {
@@ -89,8 +58,8 @@ class Sidebar extends React.Component {
 
           <div className="tab-content clearfix">
             <div className="tab-pane active" id="1">
-              <TargetListPanel targets={this.state.targets} regions={this.state.regions}
-                               resources={this.state.resources} objectives={this.state.objectives}
+              <TargetListPanel targets={this.props.filteredTargets} regions={this.props.filteredRegions}
+                               resources={this.props.filteredResources} objectives={this.props.filteredObjectives}
                                onClick={(e) => this.handleClick(e)}/>
             </div>
             <div className="tab-pane" id="2">

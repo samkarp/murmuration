@@ -1,5 +1,7 @@
 import React from 'react';
 import L from 'leaflet';
+import Draw from 'leaflet-draw';
+
 
 let config = {};
 config.params = {
@@ -24,7 +26,9 @@ export class Map extends React.Component {
       map: null,
       tileLayer: null,
       targetGroupLayer: null,
-      regionGroupLayer: null
+      regionGroupLayer: null,
+      filterRegion: null,
+      editableLayers: null
     };
     this._mapNode = null;
     this.pointToLayer = this.pointToLayer.bind(this);
@@ -49,9 +53,67 @@ export class Map extends React.Component {
     // a TileLayer is used as the "basemap"
     const tileLayer = L.tileLayer(config.tileLayer.uri, config.tileLayer.params).addTo(map);
 
-    map.on('click', function (e) {
-      alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+    const editableLayers = L.featureGroup();
+    map.addLayer(editableLayers);
+
+    // L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon';
+    // L.drawLocal.draw.handlers.rectangle.tooltip.start = 'Not telling...';
+    var options = {
+      position: 'topright',
+      draw: {
+        polyline: false,
+        polygon: {
+          allowIntersection: false, // Restricts shapes to simple polygons
+          drawError: {
+            color: '#e1e100', // Color the shape will turn when intersects
+            message: '<strong>Nope!<strong> You can\'t intersect yourself!' // Message that will show when intersect
+          },
+          shapeOptions: {
+            color: '#bada55'
+          }
+        },
+        circle: false, // Turns off this drawing tool
+        marker: false,
+        rectangle: {
+          shapeOptions: {
+            clickable: false
+          }
+        }
+      },
+      edit: {
+        featureGroup: editableLayers, //REQUIRED!!
+        remove: true
+      }
+    };
+
+    var drawControl = new L.Control.Draw(options);
+    map.addControl(drawControl);
+
+    var _this = this;
+    //Add the layer and fire the layer state
+    map.on(L.Draw.Event.CREATED, function (e) {
+      var type = e.layerType,
+        layer = e.layer;
+
+      console.log(layer.getLatLngs());
+      //Clear the layers so that there is only one drawn item at a time
+      editableLayers.clearLayers();
+
+      editableLayers.addLayer(layer);
+
+      _this.setState({filterRegion: layer.getLatLngs()[0]});
     });
+
+    //Remove the layers and modify the layer state
+    map.on(L.Draw.Event.DELETED, function (e) {
+      //Clear the layers so that there is only one drawn item at a time
+      editableLayers.clearLayers();
+
+      _this.setState({filterRegion: null});
+
+    });
+
+
     // set our state to include the tile layer
     this.setState({map, tileLayer});
   }
@@ -126,6 +188,14 @@ export class Map extends React.Component {
     this.state.map.fitBounds(target.getBounds(), fitBoundsParams);
   }
 
+  // handleMapPolygonFilter(obj){
+  //
+  // }
+
+  handleMapPolygonFilter(item) {
+    this.props.onClick(item);
+  }
+
   pointToLayer(feature, latlng) {
     // renders our GeoJSON points as circle markers, rather than Leaflet's default image markers
     // parameters to style the GeoJSON markers
@@ -144,8 +214,13 @@ export class Map extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     // code to run when the component receives new props or state
     // check to see if geojson is stored, map is created, and geojson overlay needs to be added
-    console.log("Updating with updated items:");
-    console.log(this.props.items);
+    console.log("Updating with updated items:"+new Date());
+
+    // if(Object.keys(this.state.editableLayers._layers).length > 0) {
+      if(prevState.filterRegion != this.state.filterRegion) {
+        this.handleMapPolygonFilter(this.state.filterRegion);
+      }
+
 
     function isTarget(entry) {
       return entry._type == "target"
