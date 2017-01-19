@@ -12,10 +12,6 @@ class RegionListPanel extends React.Component {
     }
   }
 
-  handleClick(selection) {
-    this.props.onClick(selection);
-  }
-
   componentWillReceiveProps(nextProps) {
 
     if(this.props != nextProps) {
@@ -23,10 +19,12 @@ class RegionListPanel extends React.Component {
     }
   }
 
+  handleClick(selection) {
+    this.props.onClick(selection);
+  }
 
   handleSearch(vals){
     console.log("Handling Region Search");
-    console.log(vals);
 
     var idArr = [vals.value];
 

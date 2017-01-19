@@ -26,7 +26,6 @@ class TargetListPanel extends React.Component {
 
   handleSearch(vals){
     console.log("Handling Search");
-    console.log(vals);
 
     var idArr = [vals.value];
 

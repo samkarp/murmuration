@@ -12,10 +12,6 @@ class ObjectiveListPanel extends React.Component {
     }
   }
 
-  handleClick(selection) {
-    this.props.onClick(selection);
-  }
-
   componentWillReceiveProps(nextProps) {
 
     if(this.props != nextProps) {
@@ -23,6 +19,9 @@ class ObjectiveListPanel extends React.Component {
     }
   }
 
+  handleClick(selection) {
+    this.props.onClick(selection);
+  }
 
   handleSearch(vals){
     console.log("Handling Objectives Search");

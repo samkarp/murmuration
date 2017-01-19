@@ -3,8 +3,9 @@ import Map from './Map';
 import Sidebar from './Sidebar';
 import axios from 'axios';
 
-function isMarkerInsidePolygon(marker, poly) {
-  // var x = marker.lat, y = marker.lng;
+
+function isPointInsidePolygon(marker, poly) {
+  // ray-casting algorithm
   var x = marker[1], y = marker[0];
 
   var inside = false;
@@ -18,6 +19,18 @@ function isMarkerInsidePolygon(marker, poly) {
   }
 
   return inside;
+}
+
+//Check if any points in a Region are within the Search polygon
+function doesPolygonIntersectPolygon(regionPoly, searchPoly) {
+  //For each point
+  for(var i = 0; i < regionPoly.length; i++) {
+    if(isPointInsidePolygon(regionPoly[i], searchPoly)){
+      return true;
+    }
+  }
+  return false;
+
 }
 
 
@@ -80,28 +93,7 @@ class ViewMapItems extends React.Component {
         });
   }
 
-  inside(point, vs) {
-    // ray-casting algorithm based on
-    // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
-
-    var x = point[0], y = point[1];
-
-    var inside = false;
-    for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
-      var xi = vs[i][0], yi = vs[i][1];
-      var xj = vs[j][0], yj = vs[j][1];
-
-      var intersect = ((yi > y) != (yj > y))
-        && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-      if (intersect) inside = !inside;
-    }
-
-    return inside;
-  }
-
   updateMap(object) {
-
-    // console.log(object);
 
     var newArray = this.state.selectedItems.slice();
     if (!newArray.includes(object)) {
@@ -116,21 +108,55 @@ class ViewMapItems extends React.Component {
 
   filterItems(polygon) {
     console.log("Filtering Items");
-    console.log(polygon);
 
     var filteredTgts = [];
+    var targetIds = [];
+    var filteredRgns = [];
+    var regionIds = [];
+    var filteredObjs = [];
+    var filteredRsrs = [];
+    console.log(this.state.objectives);
+    console.log(this.state.resources);
+
     if(polygon != null) {
       this.state.targets.map(function (target) {
 
-        if(isMarkerInsidePolygon(target._source.loc, polygon)){
+        if(isPointInsidePolygon(target._source.loc, polygon)){
           filteredTgts.push(target);
+          targetIds.push(target._id);
         }
       });
+
+      this.state.regions.map(function (region) {
+
+        if(doesPolygonIntersectPolygon(region._source.loc.coordinates[0], polygon)){
+          filteredRgns.push(region);
+          regionIds.push(region._id)
+        }
+      });
+
+      this.state.objectives.map(function (objective) {
+
+        if(targetIds.some(tId=> objective._source.targets.includes(tId))) {
+          filteredObjs.push(objective);
+        }
+      });
+
+      this.state.resources.map(function (resource) {
+        if(regionIds.some(rId=> resource._source.regionids.includes(rId))) {
+          filteredRsrs.push(resource);
+        }
+      });
+
     } else {
       filteredTgts = this.state.targets;
+      filteredRgns = this.state.regions;
+      filteredObjs = this.state.objectives;
+      filteredRsrs = this.state.resources;
     }
 
-    this.setState({filteredTargets: filteredTgts});
+    this.setState({filteredTargets: filteredTgts, filteredRegions: filteredRgns,
+                  filteredObjectives: filteredObjs, filteredResources: filteredRsrs});
 
   }
 

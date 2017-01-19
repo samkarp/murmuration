@@ -3,27 +3,12 @@ import TargetListPanel from './TargetPanel';
 import RegionListPanel from './RegionPanel';
 import ResourceListPanel from './ResourcePanel';
 import ObjectiveListPanel from './ObjectivePanel';
-import axios from 'axios';
 
 class Sidebar extends React.Component {
 
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.state = {
-      targets: [],
-      regions: [],
-      resources: [],
-      objectives: []
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-
-    if(this.props != nextProps) {
-      this.setState({targets: nextProps.targets, regions: nextProps.regions,
-                    resources: nextProps.resources, objectives: nextProps.objectives})
-    }
   }
 
   handleClick(item) {
@@ -63,18 +48,18 @@ class Sidebar extends React.Component {
                                onClick={(e) => this.handleClick(e)}/>
             </div>
             <div className="tab-pane" id="2">
-              <RegionListPanel targets={this.state.targets} regions={this.state.regions}
-                               resources={this.state.resources} objectives={this.state.objectives}
+              <RegionListPanel targets={this.props.filteredTargets} regions={this.props.filteredRegions}
+                               resources={this.props.filteredResources} objectives={this.props.filteredObjectives}
                                onClick={(e) => this.handleClick(e)}/>
             </div>
             <div className="tab-pane" id="3">
-              <ObjectiveListPanel targets={this.state.targets} regions={this.state.regions}
-                                  resources={this.state.resources} objectives={this.state.objectives}
+              <ObjectiveListPanel targets={this.props.filteredTargets} regions={this.props.filteredRegions}
+                                  resources={this.props.filteredResources} objectives={this.props.filteredObjectives}
                                   onClick={(e) => this.handleClick(e)}/>
             </div>
             <div className="tab-pane" id="4">
-              <ResourceListPanel targets={this.state.targets} regions={this.state.regions}
-                                 resources={this.state.resources} objectives={this.state.objectives}
+              <ResourceListPanel targets={this.props.filteredTargets} regions={this.props.filteredRegions}
+                                 resources={this.props.filteredResources} objectives={this.props.filteredObjectives}
                                  onClick={(e) => this.handleClick(e)}/>
             </div>
           </div>

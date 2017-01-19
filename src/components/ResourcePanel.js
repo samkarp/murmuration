@@ -12,10 +12,6 @@ class ResourceListPanel extends React.Component {
     }
   }
 
-  handleClick(selection) {
-    this.props.onClick(selection);
-  }
-
   componentWillReceiveProps(nextProps) {
 
     if(this.props != nextProps) {
@@ -23,7 +19,10 @@ class ResourceListPanel extends React.Component {
     }
   }
 
-
+  handleClick(selection) {
+    this.props.onClick(selection);
+  }
+  
   handleSearch(vals){
     console.log("Handling Objectives Search");
     console.log(vals);
