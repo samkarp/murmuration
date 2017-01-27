@@ -12,3 +12,6 @@ curl -XPOST 'localhost:9200/murmuration_objective/objective/_bulk?pretty' --data
 
 echo -e "\nLoading resource sample data"
 curl -XPOST 'localhost:9200/murmuration_resource/resource/_bulk?pretty' --data-binary "@resources.json"
+
+echo -e "\nLoading patrol sample data"
+curl -XPOST 'localhost:9200/murmuration_patrol/patrol/_bulk?pretty' --data-binary "@patrols.json"

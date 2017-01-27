@@ -8,6 +8,7 @@ const App = ({ children }) => (
       <h1>Murmuration {version}</h1>
       <Link to="/table">Table</Link>
       <Link to="/viewMapItems">Map</Link>
+      <Link to="/schedule">Schedule</Link>
     </header>
     <section>
       {children || 'Welcome to Murmuration'}
