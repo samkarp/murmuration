@@ -1,6 +1,5 @@
 import React from 'react';
-import Sidebar from './Sidebar';
-import events from '../../sample_data/events'
+import ScheduleSidebar from './ScheduleSidebar';
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 import BigCalendar from 'react-big-calendar'
@@ -77,7 +76,7 @@ class Schedule extends React.Component {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 sidebar">
-          <Sidebar onClick={(e) => this.updateMap(e)} targets={[]}
+          <ScheduleSidebar onClick={(e) => this.updateMap(e)} targets={[]}
                    regions={[]} objectives={[]}
                    resources={[]} filteredTargets={[]}
                    filteredRegions={[]} filteredObjectives={[]}
